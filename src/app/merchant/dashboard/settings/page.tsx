@@ -22,7 +22,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Separator } from '@/components/ui/separator';
 
 const PICUI_API_URL = 'https://picui.cn/api/v1/upload';
-const PICUI_API_TOKEN = '1092|E20tZ7zlyZ2kIlxsv1GU9jKOtLSEelEmTA3ZhKmG'; 
+const PICUI_API_TOKEN = process.env.NEXT_PUBLIC_PICUI_API_TOKEN || ''; 
 
 interface PaymentMethodFormData {
   id: string;
@@ -170,6 +170,10 @@ export default function MerchantSettingsPage() {
     progressSetter: (value: number | null) => void,
     uploadingSetter: (value: boolean) => void
   ): Promise<string | null> => {
+    if (!PICUI_API_TOKEN) {
+      toast({ title: '图片上传未配置', description: '请设置 NEXT_PUBLIC_PICUI_API_TOKEN。', variant: 'destructive' });
+      return null;
+    }
     uploadingSetter(true);
     progressSetter(0);
     const formData = new FormData();

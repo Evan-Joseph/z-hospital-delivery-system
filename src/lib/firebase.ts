@@ -4,16 +4,13 @@ import { getFirestore, initializeFirestore, type Firestore } from "firebase/fire
 import { getAuth, type Auth } from "firebase/auth"; // Import getAuth
 import { getStorage } from "firebase/storage"; // Import getStorage
 
-// Your web app's Firebase configuration
-// IMPORTANT: Replace with your actual Firebase project configuration!
-// Forcing a re-compile with this comment. And another one to be sure: 2025-05-22T07:39:21
 const firebaseConfig = {
-  apiKey: "AIzaSyDStQeC5TeQrlVnKG08llMQcuj0fNAVKyY",
-  authDomain: "mediorder-9suf6.firebaseapp.com",
-  projectId: "mediorder-9suf6",
-  storageBucket: "mediorder-9suf6.appspot.com",
-  messagingSenderId: "817473525117",
-  appId: "1:817473525117:web:69c8ebe167c359b87e2814"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "",
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "",
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "",
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "",
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "",
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || ""
 };
 
 

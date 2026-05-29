@@ -33,7 +33,7 @@ interface MenuItemFormProps {
 }
 
 const PICUI_API_URL = 'https://picui.cn/api/v1/upload';
-const PICUI_API_TOKEN = '1092|E20tZ7zlyZ2kIlxsv1GU9jKOtLSEelEmTA3ZhKmG';
+const PICUI_API_TOKEN = process.env.NEXT_PUBLIC_PICUI_API_TOKEN || '';
 
 interface LastUploadedFileDetails {
   name: string;
@@ -128,6 +128,10 @@ export default function MenuItemForm({ onSubmit, initialData, isLoading, onCance
 
   const uploadToPicUI = useCallback(async (fileToUpload: File) => {
     if (!fileToUpload) return;
+    if (!PICUI_API_TOKEN) {
+      toast({ title: '图片上传未配置', description: '请设置 NEXT_PUBLIC_PICUI_API_TOKEN。', variant: 'destructive' });
+      return;
+    }
     setIsUploadingImage(true);
     setUploadProgress(0);
     
